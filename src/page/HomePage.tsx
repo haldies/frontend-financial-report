@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion'; // Import motion dari Framer Motion
 import {
   FiTrendingUp,
   FiBarChart2,
@@ -25,156 +26,256 @@ export default function HomePage() {
     navigate('/chat');
   };
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+    },
+  };
+
   return (
-    <div className="min-h-screen bg-blue-50">
+    <div className="min-h-screen bg-gray-50">
       <Header />
 
-      {/* Hero Section */}
-      <div className="relative bg-gradient-to-r from-blue-500 to-blue-600 overflow-hidden">
+      {/* Hero Section Utama */}
+      <div className="relative bg-gradient-to-r pt-24 from-teal-600 to-emerald-700 overflow-hidden">
         <div className="max-w-7xl mx-auto">
           <div className="relative z-10 pb-8 sm:pb-16 md:pb-20">
             <main className="flex justify-center mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 lg:mt-16 lg:px-8 xl:mt-20">
-              <div className="sm:text-center ">
-                <h1 className="text-4xl tracking-tight font-extrabold text-white sm:text-5xl md:text-6xl">
-                  <span className="block">Financial Report</span>
-                  <span className="block text-blue-100">AI Chatbot Analysis</span>
-                </h1>
-                <p className="mt-3 text-base text-blue-100 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
-                  Our AI chatbot simplifies financial report analysis. Get instant insights, trends, and recommendations through natural conversation.
-                </p>
-                <div className="mt-5 sm:mt-8 sm:flex sm:justify-center">
+              <motion.div
+                className="sm:text-center"
+                initial="hidden"
+                animate="visible"
+                variants={containerVariants}
+              >
+                <motion.h1
+                  className="text-4xl tracking-tight font-extrabold text-white sm:text-5xl md:text-6xl"
+                  variants={itemVariants}
+                >
+                  <span className="block">Laporan Keuangan</span>
+                  <span className="block text-teal-100">Analisis Chatbot AI</span>
+                </motion.h1>
+                <motion.p
+                  className="mt-3 text-base text-teal-100 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0"
+                  variants={itemVariants}
+                >
+                  Chatbot AI kami menyederhanakan analisis laporan keuangan. Dapatkan wawasan instan, tren, dan rekomendasi melalui percakapan alami.
+                </motion.p>
+                <motion.div
+                  className="mt-5 sm:mt-8 sm:flex sm:justify-center"
+                  variants={itemVariants}
+                >
                   <div className="rounded-md shadow">
                     <button
                       onClick={handleAnalyzeClick}
                       disabled={isAnalyzing}
-                      className={`w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-blue-700 bg-blue-100 hover:bg-blue-50 md:py-4 md:text-lg md:px-10 transition-colors duration-200 ${isAnalyzing ? 'opacity-75 cursor-not-allowed' : ''
+                      className={`w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-teal-800 bg-teal-100 hover:bg-teal-50 md:py-4 md:text-lg md:px-10 transition-colors duration-200 ${isAnalyzing ? 'opacity-75 cursor-not-allowed' : ''
                         }`}
                     >
                       {isAnalyzing ? (
                         <span className="flex items-center">
-                          <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-blue-700" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                          <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-teal-800" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                             <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                             <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                           </svg>
-                          Analyzing...
+                          Menganalisis...
                         </span>
                       ) : (
                         <>
                           <FiMessageSquare className="mr-2" />
-                          Chat with AI Analyst
+                          Chat dengan Analis AI
                         </>
                       )}
                     </button>
                   </div>
-                </div>
-              </div>
+                </motion.div>
+              </motion.div>
             </main>
           </div>
         </div>
       </div>
 
+      {/* Seksi Hero Tambahan (Minimalis & Kreatif) */}
+      <div className="relative bg-gray-100 py-20 overflow-hidden">
+        <div className="absolute inset-0 z-0 opacity-10">
+          {/* Tambahkan elemen visual abstrak di sini */}
+          <svg className="absolute top-0 left-0 w-1/3 h-1/3 text-emerald-300" fill="currentColor" viewBox="0 0 100 100">
+            <rect x="0" y="0" width="100" height="100" rx="20" ry="20" />
+          </svg>
+          <svg className="absolute bottom-0 right-0 w-1/4 h-1/4 text-teal-300" fill="currentColor" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="50" />
+          </svg>
+          <svg className="absolute top-1/4 right-1/4 w-1/6 h-1/6 text-gray-400" fill="currentColor" viewBox="0 0 100 100">
+            <polygon points="50,0 100,100 0,100" />
+          </svg>
+        </div>
+        <motion.div
+          className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.8 }}
+        >
+          <h2 className="text-4xl font-extrabold text-gray-800 sm:text-5xl">
+            <span className="block">Visualisasikan Data Anda,</span>
+            <span className="block text-emerald-600">Pahami Lebih Dalam.</span>
+          </h2>
+          <p className="mt-4 text-xl text-gray-600 max-w-2xl mx-auto">
+            Kami mengubah angka-angka rumit menjadi cerita yang mudah dicerna, membantu Anda membuat keputusan yang lebih cerdas dengan cepat.
+          </p>
+          <div className="mt-10">
+            <motion.div
+              className="inline-flex rounded-md shadow"
+              initial={{ scale: 0.9, opacity: 0 }}
+              whileInView={{ scale: 1, opacity: 1 }}
+              viewport={{ once: true, amount: 0.5 }}
+              transition={{ delay: 0.3, duration: 0.5 }}
+            >
+              <button
+                onClick={handleAnalyzeClick}
+                className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-emerald-600 hover:bg-emerald-700 transition-colors duration-200"
+              >
+                <FiBarChart2 className="mr-2" />
+                Lihat Contoh Visualisasi
+              </button>
+            </motion.div>
+          </div>
+        </motion.div>
+      </div>
+
+  
+
       {/* Features Section */}
       <div className="py-12 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="lg:text-center">
-            <h2 className="text-base text-blue-500 font-semibold tracking-wide uppercase">
-              Features
+            <h2 className="text-base text-emerald-600 font-semibold tracking-wide uppercase">
+              Fitur Utama
             </h2>
-            <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-blue-500 sm:text-4xl">
-              Conversational Financial Analysis
+            <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-800 sm:text-4xl">
+              Analisis Keuangan Percakapan
             </p>
-            <p className="mt-4 max-w-2xl text-xl text-blue-400 lg:mx-auto">
-              Our AI chatbot understands your questions and provides detailed financial insights.
+            <p className="mt-4 max-w-2xl text-xl text-gray-600 lg:mx-auto">
+              Chatbot AI kami memahami pertanyaan Anda dan memberikan wawasan keuangan yang mendetail.
             </p>
           </div>
 
-          <div className="mt-10">
-            <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
-              {features.map((feature) => (
-                <div key={feature.name} className="flex">
-                  <div className="flex-shrink-0">
-                    <div className="flex items-center justify-center h-12 w-12 rounded-md bg-blue-100 text-blue-500">
-                      <feature.icon className="h-6 w-6" />
-                    </div>
-                  </div>
-                  <div className="ml-4">
-                    <h3 className="text-lg leading-6 font-medium text-blue-500">
-                      {feature.name}
-                    </h3>
-                    <p className="mt-2 text-base text-blue-400">
-                      {feature.description}
-                    </p>
+          <motion.div
+            className="mt-10 grid gap-10 md:grid-cols-2 lg:grid-cols-3"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={containerVariants}
+          >
+            {features.map((feature) => (
+              <motion.div key={feature.name} className="flex" variants={itemVariants}>
+                <div className="flex-shrink-0">
+                  <div className="flex items-center justify-center h-12 w-12 rounded-md bg-emerald-100 text-emerald-600">
+                    <feature.icon className="h-6 w-6" />
                   </div>
                 </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* How It Works */}
-      <div className="py-12 bg-blue-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="lg:text-center mb-12">
-            <h2 className="text-base text-blue-400 font-semibold tracking-wide uppercase">
-              How It Works
-            </h2>
-            <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-blue-500 sm:text-4xl">
-              Simple Three-Step Process
-            </p>
-          </div>
-          <div className="mt-10">
-            <div className="grid gap-10 md:grid-cols-3">
-              {howToUse.map((step) => (
-                <div key={step.name} className="relative bg-white p-6 rounded-lg shadow-sm border border-blue-100">
-
-                  <div className="flex items-center justify-center h-12 w-12 rounded-md bg-blue-100 text-blue-500 mb-4">
-                    <step.icon className="h-6 w-6" />
-                  </div>
-                  <h3 className="text-lg font-medium text-blue-500 mb-2">
-                    {step.name}
+                <div className="ml-4">
+                  <h3 className="text-lg leading-6 font-medium text-gray-800">
+                    {feature.name}
                   </h3>
-                  <p className="text-blue-400">
-                    {step.description}
+                  <p className="mt-2 text-base text-gray-600">
+                    {feature.description}
                   </p>
                 </div>
-              ))}
-            </div>
-          </div>
+              </motion.div>
+            ))}
+          </motion.div>
         </div>
       </div>
 
-      {/* CTA Section */}
-      <div className="bg-gradient-to-r from-blue-400 to-blue-500">
-        <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8 lg:flex lg:items-center lg:justify-between">
-          <div>
-            <h2 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
-              <span className="block">Ready to transform your</span>
-              <span className="block text-blue-100">
-                financial analysis workflow?
-              </span>
+
+      {/* How It Works */}
+      <div className="py-12 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="lg:text-center mb-12">
+            <h2 className="text-base text-gray-600 font-semibold tracking-wide uppercase">
+              Cara Kerja
             </h2>
-            <p className="mt-3 max-w-3xl text-lg text-blue-100">
-              Start your free trial today and experience AI-powered financial insights.
+            <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-800 sm:text-4xl">
+              Proses Tiga Langkah Sederhana
             </p>
           </div>
-          <div className="mt-8 flex lg:mt-0 lg:flex-shrink-0 space-x-4">
+          <motion.div
+            className="mt-10 grid gap-10 md:grid-cols-3"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={containerVariants}
+          >
+            {howToUse.map((step) => (
+              <motion.div key={step.name} className="relative bg-white p-6 rounded-lg shadow-sm border border-gray-100" variants={itemVariants}>
+                <div className="flex items-center justify-center h-12 w-12 rounded-md bg-emerald-100 text-emerald-600 mb-4">
+                  <step.icon className="h-6 w-6" />
+                </div>
+                <h3 className="text-lg font-medium text-gray-800 mb-2">
+                  {step.name}
+                </h3>
+                <p className="text-gray-600">
+                  {step.description}
+                </p>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </div>
+      {/* CTA Section */}
+      <div className="bg-gradient-to-r from-teal-500 to-emerald-600">
+        <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8 lg:flex lg:items-center lg:justify-between">
+          <motion.div
+            initial={{ x: -50, opacity: 0 }}
+            whileInView={{ x: 0, opacity: 1 }}
+            viewport={{ once: true, amount: 0.5 }}
+            transition={{ duration: 0.8 }}
+          >
+            <h2 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+              <span className="block">Siap mengubah</span>
+              <span className="block text-teal-100">
+                alur kerja analisis keuangan Anda?
+              </span>
+            </h2>
+            <p className="mt-3 max-w-3xl text-lg text-teal-100">
+              Mulai uji coba gratis Anda hari ini dan rasakan wawasan keuangan yang didukung AI.
+            </p>
+          </motion.div>
+          <motion.div
+            className="mt-8 flex lg:mt-0 lg:flex-shrink-0 space-x-4"
+            initial={{ x: 50, opacity: 0 }}
+            whileInView={{ x: 0, opacity: 1 }}
+            viewport={{ once: true, amount: 0.5 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
             <div className="inline-flex rounded-md shadow">
               <button
                 onClick={handleAnalyzeClick}
-                className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-blue-500 bg-white hover:bg-blue-50 transition-colors duration-200"
+                className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-emerald-700 bg-white hover:bg-gray-50 transition-colors duration-200"
               >
                 <FiMessageSquare className="mr-2" />
-                Start Chatting
+                Mulai Chatting
               </button>
             </div>
             <div className="inline-flex rounded-md shadow">
-              <button className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-500 bg-opacity-60 hover:bg-opacity-70 transition-colors duration-200">
+              <button className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-emerald-600 bg-opacity-80 hover:bg-opacity-90 transition-colors duration-200">
                 <FiFileText className="mr-2" />
-                Learn More
+                Pelajari Lebih Lanjut
               </button>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
 
@@ -186,33 +287,33 @@ export default function HomePage() {
 // Features data
 const features = [
   {
-    name: 'Natural Language Queries',
-    description: 'Ask questions about your financial reports in plain English and get detailed answers.',
+    name: 'Kueri Bahasa Alami',
+    description: 'Ajukan pertanyaan tentang laporan keuangan Anda dalam bahasa Inggris sederhana dan dapatkan jawaban terperinci.',
     icon: FiMessageSquare,
   },
   {
-    name: 'Automated Insights',
-    description: 'Get automatic highlights of key financial metrics and potential concerns.',
+    name: 'Wawasan Otomatis',
+    description: 'Dapatkan sorotan otomatis dari metrik keuangan utama dan potensi masalah.',
     icon: FiZap,
   },
   {
-    name: 'Visual Analytics',
-    description: 'Interactive charts and graphs generated from your financial data.',
+    name: 'Analisis Visual',
+    description: 'Bagan dan grafik interaktif yang dihasilkan dari data keuangan Anda.',
     icon: FiBarChart2,
   },
   {
-    name: 'Trend Analysis',
-    description: 'Identify patterns and trends across multiple reporting periods.',
+    name: 'Analisis Tren',
+    description: 'Identifikasi pola dan tren di berbagai periode pelaporan.',
     icon: FiTrendingUp,
   },
   {
     name: 'Benchmarking',
-    description: 'Compare your performance against industry standards.',
+    description: 'Bandingkan kinerja Anda dengan standar industri.',
     icon: FiAward,
   },
   {
-    name: 'Cash Flow Analysis',
-    description: 'Detailed breakdowns of cash inflows and outflows.',
+    name: 'Analisis Arus Kas',
+    description: 'Perincian mendetail tentang arus kas masuk dan keluar.',
     icon: FiDollarSign,
   },
 ];
@@ -220,18 +321,18 @@ const features = [
 // How it works steps
 const howToUse = [
   {
-    name: 'Upload Your Reports',
-    description: 'Securely upload your financial statements in PDF, Excel, or other formats.',
+    name: 'Unggah Laporan Anda',
+    description: 'Unggah laporan keuangan Anda dengan aman dalam format PDF, Excel, atau format lainnya.',
     icon: FiFileText,
   },
   {
-    name: 'Chat with AI Analyst',
-    description: 'Ask questions about your financial data in natural language.',
+    name: 'Chat dengan Analis AI',
+    description: 'Ajukan pertanyaan tentang data keuangan Anda dalam bahasa alami.',
     icon: FiMessageSquare,
   },
   {
-    name: 'Get Insights',
-    description: 'Receive detailed analysis, visualizations, and recommendations.',
+    name: 'Dapatkan Wawasan',
+    description: 'Terima analisis terperinci, visualisasi, dan rekomendasi.',
     icon: FiCheckCircle,
   },
 ];

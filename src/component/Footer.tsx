@@ -1,15 +1,16 @@
-
 function Footer() {
     return (
         <div>
             {/* Footer */}
-            <footer className="bg-white dark:bg-gray-800 text-blue-500 dark:text-blue-200">
+            {/* Background for light mode is gray-100, for dark mode is gray-900.
+                Text color adjusted for both modes to fit the new palette. */}
+            <footer className="bg-gray-100 text-gray-700 dark:bg-gray-900 dark:text-gray-300">
                 <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
                     <div className="xl:grid xl:grid-cols-3 xl:gap-8">
                         <div className="space-y-8 xl:col-span-1">
                             <div className="flex items-center">
                                 <svg
-                                    className="h-8 w-8 text-blue-300"
+                                    className="h-8 w-8 text-emerald-600 dark:text-teal-400" // Logo icon color: emerald for light, teal for dark
                                     xmlns="http://www.w3.org/2000/svg"
                                     fill="none"
                                     viewBox="0 0 24 24"
@@ -22,16 +23,16 @@ function Footer() {
                                         d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"
                                     />
                                 </svg>
-                                <span className="ml-2 text-xl font-bold ">FinAnalyzer</span>
+                                <span className="ml-2 text-xl font-bold text-gray-800 dark:text-white">FinAnalyzer</span> {/* Logo text color adjusted */}
                             </div>
-                            <p className="text-blue-400 text-base">
+                            <p className="text-gray-600 dark:text-gray-400 text-base"> {/* Description text color adjusted */}
                                 Making financial analysis accessible to everyone through AI technology.
                             </p>
                         </div>
                         <div className="mt-12 grid grid-cols-2 gap-8 xl:mt-0 xl:col-span-2">
                             <div className="md:grid md:grid-cols-2 md:gap-8">
                                 <div>
-                                    <h3 className="text-sm font-semibold text-blue-500 tracking-wider uppercase">
+                                    <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200 tracking-wider uppercase"> {/* Heading text color adjusted */}
                                         Solutions
                                     </h3>
                                     <ul className="mt-4 space-y-4">
@@ -39,7 +40,7 @@ function Footer() {
                                             <li key={item.name}>
                                                 <a
                                                     href={item.href}
-                                                    className="text-base text-blue-400 hover:"
+                                                    className="text-base text-gray-600 hover:text-emerald-600 dark:text-gray-400 dark:hover:text-teal-300 transition-colors duration-200" // Link colors adjusted
                                                 >
                                                     {item.name}
                                                 </a>
@@ -48,7 +49,7 @@ function Footer() {
                                     </ul>
                                 </div>
                                 <div className="mt-12 md:mt-0">
-                                    <h3 className="text-sm font-semibold text-blue-500 tracking-wider uppercase">
+                                    <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200 tracking-wider uppercase">
                                         Support
                                     </h3>
                                     <ul className="mt-4 space-y-4">
@@ -56,7 +57,7 @@ function Footer() {
                                             <li key={item.name}>
                                                 <a
                                                     href={item.href}
-                                                    className="text-base text-blue-400 hover:"
+                                                    className="text-base text-gray-600 hover:text-emerald-600 dark:text-gray-400 dark:hover:text-teal-300 transition-colors duration-200"
                                                 >
                                                     {item.name}
                                                 </a>
@@ -67,7 +68,7 @@ function Footer() {
                             </div>
                             <div className="md:grid md:grid-cols-2 md:gap-8">
                                 <div>
-                                    <h3 className="text-sm font-semibold text-blue-500 tracking-wider uppercase">
+                                    <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200 tracking-wider uppercase">
                                         Company
                                     </h3>
                                     <ul className="mt-4 space-y-4">
@@ -75,7 +76,7 @@ function Footer() {
                                             <li key={item.name}>
                                                 <a
                                                     href={item.href}
-                                                    className="text-base text-blue-400 hover:"
+                                                    className="text-base text-gray-600 hover:text-emerald-600 dark:text-gray-400 dark:hover:text-teal-300 transition-colors duration-200"
                                                 >
                                                     {item.name}
                                                 </a>
@@ -84,7 +85,7 @@ function Footer() {
                                     </ul>
                                 </div>
                                 <div className="mt-12 md:mt-0">
-                                    <h3 className="text-sm font-semibold text-blue-500 tracking-wider uppercase">
+                                    <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200 tracking-wider uppercase">
                                         Legal
                                     </h3>
                                     <ul className="mt-4 space-y-4">
@@ -92,7 +93,7 @@ function Footer() {
                                             <li key={item.name}>
                                                 <a
                                                     href={item.href}
-                                                    className="text-base text-blue-400 hover:"
+                                                    className="text-base text-gray-600 hover:text-emerald-600 dark:text-gray-400 dark:hover:text-teal-300 transition-colors duration-200"
                                                 >
                                                     {item.name}
                                                 </a>
@@ -103,8 +104,8 @@ function Footer() {
                             </div>
                         </div>
                     </div>
-                    <div className="mt-12 border-t border-blue-500 pt-8">
-                        <p className="text-base text-blue-500 xl:text-center">
+                    <div className="mt-12 border-t border-gray-300 dark:border-gray-700 pt-8"> {/* Border color adjusted */}
+                        <p className="text-base text-gray-600 dark:text-gray-400 xl:text-center"> {/* Copyright text color adjusted */}
                             &copy; {new Date().getFullYear()} FinAnalyzer. All rights reserved.
                         </p>
                     </div>
@@ -118,28 +119,28 @@ export default Footer
 
 
 const footerNavigation = {
-  solutions: [
-    { name: 'Financial Analysis', href: '#' },
-    { name: 'Risk Assessment', href: '#' },
-    { name: 'Investment Insights', href: '#' },
-    { name: 'Cash Flow Optimization', href: '#' },
-  ],
-  support: [
-    { name: 'Documentation', href: '#' },
-    { name: 'Guides', href: '#' },
-    { name: 'API Status', href: '#' },
-    { name: 'Live Support', href: '#' },
-  ],
-  company: [
-    { name: 'About', href: '#' },
-    { name: 'Blog', href: '#' },
-    { name: 'Careers', href: '#' },
-    { name: 'Press', href: '#' },
-  ],
-  legal: [
-    { name: 'Privacy', href: '#' },
-    { name: 'Terms', href: '#' },
-    { name: 'Cookie Policy', href: '#' },
-    { name: 'GDPR', href: '#' },
-  ],
+    solutions: [
+        { name: 'Financial Analysis', href: '#' },
+        { name: 'Risk Assessment', href: '#' },
+        { name: 'Investment Insights', href: '#' },
+        { name: 'Cash Flow Optimization', href: '#' },
+    ],
+    support: [
+        { name: 'Documentation', href: '#' },
+        { name: 'Guides', href: '#' },
+        { name: 'API Status', href: '#' },
+        { name: 'Live Support', href: '#' },
+    ],
+    company: [
+        { name: 'About', href: '#' },
+        { name: 'Blog', href: '#' },
+        { name: 'Careers', href: '#' },
+        { name: 'Press', href: '#' },
+    ],
+    legal: [
+        { name: 'Privacy', href: '#' },
+        { name: 'Terms', href: '#' },
+        { name: 'Cookie Policy', href: '#' },
+        { name: 'GDPR', href: '#' },
+    ],
 };

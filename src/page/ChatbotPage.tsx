@@ -1,49 +1,66 @@
 import { useState, useEffect } from "react";
-
 import { CgMenuRightAlt, CgMenuLeftAlt } from "react-icons/cg";
+import { motion } from "framer-motion"; // Import motion from framer-motion
 
 import ChatBot from "../component/ChatBot";
 import Sidebar from "../component/Sidebar";
 
-function Chatbot() {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+function ChatbotPage() {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-  
   useEffect(() => {
     if (isSidebarOpen) {
       document.body.classList.add("overflow-hidden");
     } else {
       document.body.classList.remove("overflow-hidden");
     }
+    // Clean up the class when the component unmounts
+    return () => {
+      document.body.classList.remove("overflow-hidden");
+    };
   }, [isSidebarOpen]);
 
   return (
-    <div className="min-h-screen flex relative">
-      {/* Sidebar dengan Scroll Sendiri */}
+    <div className="min-h-screen flex relative bg-gray-50">
+      {/* Sidebar component remains here, it will now overlay due to its positioning */}
       <Sidebar isOpen={isSidebarOpen} />
 
-      {/* Main Content dengan Overlay */}
-      <div className="flex-1 p-6 relative ">
-        {/* Overlay hanya muncul di ChatBot saat sidebar terbuka */}
+      {/* Main content div - NO X-translation animation */}
+      <div className="flex-1 p-6 relative">
+        {/* Overlay appears on ChatBot when sidebar is open */}
         {isSidebarOpen && (
-          <div className="absolute inset-0 bg-black opacity-50 z-40 transition-opacity duration-300 pointer-events-none"></div>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.4 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="absolute inset-0 bg-emerald-900 z-40" // Removed fixed opacity class to let Framer Motion control it
+            onClick={() => setIsSidebarOpen(false)}
+          ></motion.div>
         )}
 
-        <h1 className="text-blue-700 ml-12  font-mono text-2xl mb-8 relative z-40">
-          Chatfine
-        </h1>
+        <a href="/">
+          <h1 className="text-emerald-700 ml-12 font-extrabold text-3xl mb-8 relative z-40">
+            Chatfine
+          </h1>
+        </a>
+
         <ChatBot />
       </div>
 
-      {/* Tombol Toggle Sidebar */}
+      {/* Sidebar Toggle Button */}
       <button
         onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-        className="absolute top-4 left-4 p-2 bg-white shadow-lg rounded-full z-50"
+        className="absolute top-6 left-4 p-2 rounded-full bg-white shadow-md z-50 text-emerald-600 hover:bg-emerald-50 transition-colors duration-200"
       >
-        {isSidebarOpen ? <CgMenuLeftAlt size={30} color="blue" /> : <CgMenuRightAlt size={30} color="blue" />}
+        {isSidebarOpen ? (
+          <CgMenuLeftAlt size={28} />
+        ) : (
+          <CgMenuRightAlt size={28} />
+        )}
       </button>
     </div>
   );
 }
 
-export default Chatbot;
+export default ChatbotPage;

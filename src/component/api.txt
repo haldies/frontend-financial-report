@@ -1,0 +1,55 @@
+ // COMMENTED OUT REAL API CALL
+    /*
+    try {
+      const response = await fetch("https://backend-ai-financial-report-50598077190.asia-southeast1.run.app/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ query: userMessage }),
+      });
+
+      const data = await response.json();
+
+      if (data && data.jawaban) {
+        setMessages((prev) => [...prev, { text: data.jawaban, isBot: true }]);
+      } else if (data.error) {
+        setMessages((prev) => [...prev, { text: data.error, isBot: true }]);
+      } else {
+        setMessages((prev) => [
+          ...prev,
+          { text: "Bot tidak bisa memberikan jawaban.", isBot: true },
+        ]);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      setMessages((prev) => [
+        ...prev,
+        { text: "Terjadi kesalahan saat menghubungi server.", isBot: true },
+      ]);
+    } finally {
+      setLoading(false);
+    }
+    */
+
+
+  const fakeResponses = [
+    "Hello! I'm ChatFine, your AI assistant for financial analysis. How can I help you today?",
+    "<think>User asked about financial analysis. I need to provide informative and helpful answers.</think>Based on my analysis, here are the key points to note in the company's financial statements.",
+    "For financial ratio analysis, there are several key indicators to consider: liquidity ratios, profitability ratios, and solvency ratios.",
+    "<think>This question requires detailed explanation of financial metrics. I'll provide concrete examples.</think>Let's look at an example of ROE (Return on Equity) calculation. ROE is calculated as: Net Income / Total Equity × 100%. For example, if net income is Rp 100 million and total equity is Rp 500 million, then ROE = 20%.",
+    "Thank you for your question! Is there anything else you'd like to ask about financial analysis?"
+  ];
+
+  const handleSend = async () => {
+    if (!inputMessage.trim()) return;
+
+    const userMessage = inputMessage.trim();
+    setMessages((prev) => [...prev, { text: userMessage, isBot: false }]);
+    setInputMessage("");
+    setLoading(true);
+
+    // Simulate API delay
+    setTimeout(() => {
+      const randomResponse = fakeResponses[Math.floor(Math.random() * fakeResponses.length)];
+      setMessages((prev) => [...prev, { text: randomResponse, isBot: true }]);
+      setLoading(false);
+    }, 1000 + Math.random() * 2000);
