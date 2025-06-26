@@ -135,7 +135,7 @@ export default function ChatBot() {
       const currentMessages = [...messages, { text: userMessage, isBot: false }];
       const history = convertMessagesToHistory(currentMessages);
 
-      const response = await fetch("http://127.0.0.1:8000/chat", {
+      const response = await fetch("https://backend-ai-financial-report-50598077190.asia-southeast1.run.app/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ query: userMessage, history }),
