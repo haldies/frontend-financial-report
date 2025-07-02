@@ -7,7 +7,6 @@ import rehypeKatex from "rehype-katex";
 import "katex/dist/katex.min.css";
 
 import { MdContentCopy } from "react-icons/md";
-
 interface Message {
   text: string;
   isBot: boolean;
