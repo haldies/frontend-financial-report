@@ -1,10 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion'; // Import motion dari Framer Motion
-import {
-  FiTrendingUp,
-  FiBarChart2,
-  FiAward,
+import {  
   FiZap,
   FiDollarSign,
   FiMessageSquare,
