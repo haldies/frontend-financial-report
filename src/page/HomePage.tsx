@@ -45,7 +45,7 @@ export default function HomePage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="bg-gray-50">
       <Header />
 
       {/* Hero Section Utama */}
@@ -105,57 +105,6 @@ export default function HomePage() {
           </div>
         </div>
       </div>
-
-      {/* Seksi Hero Tambahan (Minimalis & Kreatif) */}
-      <div className="relative bg-gray-100 py-20 overflow-hidden">
-        <div className="absolute inset-0 z-0 opacity-10">
-          {/* Tambahkan elemen visual abstrak di sini */}
-          <svg className="absolute top-0 left-0 w-1/3 h-1/3 text-emerald-300" fill="currentColor" viewBox="0 0 100 100">
-            <rect x="0" y="0" width="100" height="100" rx="20" ry="20" />
-          </svg>
-          <svg className="absolute bottom-0 right-0 w-1/4 h-1/4 text-teal-300" fill="currentColor" viewBox="0 0 100 100">
-            <circle cx="50" cy="50" r="50" />
-          </svg>
-          <svg className="absolute top-1/4 right-1/4 w-1/6 h-1/6 text-gray-400" fill="currentColor" viewBox="0 0 100 100">
-            <polygon points="50,0 100,100 0,100" />
-          </svg>
-        </div>
-        <motion.div
-          className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10"
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.8 }}
-        >
-          <h2 className="text-4xl font-extrabold text-gray-800 sm:text-5xl">
-            <span className="block">Visualisasikan Data Anda,</span>
-            <span className="block text-emerald-600">Pahami Lebih Dalam.</span>
-          </h2>
-          <p className="mt-4 text-xl text-gray-600 max-w-2xl mx-auto">
-            Kami mengubah angka-angka rumit menjadi cerita yang mudah dicerna, membantu Anda membuat keputusan yang lebih cerdas dengan cepat.
-          </p>
-          <div className="mt-10">
-            <motion.div
-              className="inline-flex rounded-md shadow"
-              initial={{ scale: 0.9, opacity: 0 }}
-              whileInView={{ scale: 1, opacity: 1 }}
-              viewport={{ once: true, amount: 0.5 }}
-              transition={{ delay: 0.3, duration: 0.5 }}
-            >
-              <button
-                onClick={handleAnalyzeClick}
-                className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-emerald-600 hover:bg-emerald-700 transition-colors duration-200"
-              >
-                <FiBarChart2 className="mr-2" />
-                Lihat Contoh Visualisasi
-              </button>
-            </motion.div>
-          </div>
-        </motion.div>
-      </div>
-
-  
-
       {/* Features Section */}
       <div className="py-12 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -288,7 +237,7 @@ export default function HomePage() {
 const features = [
   {
     name: 'Kueri Bahasa Alami',
-    description: 'Ajukan pertanyaan tentang laporan keuangan Anda dalam bahasa Inggris sederhana dan dapatkan jawaban terperinci.',
+    description: 'Ajukan pertanyaan tentang laporan keuangan Anda dan dapatkan jawaban terperinci.',
     icon: FiMessageSquare,
   },
   {
@@ -297,23 +246,8 @@ const features = [
     icon: FiZap,
   },
   {
-    name: 'Analisis Visual',
-    description: 'Bagan dan grafik interaktif yang dihasilkan dari data keuangan Anda.',
-    icon: FiBarChart2,
-  },
-  {
-    name: 'Analisis Tren',
-    description: 'Identifikasi pola dan tren di berbagai periode pelaporan.',
-    icon: FiTrendingUp,
-  },
-  {
-    name: 'Benchmarking',
-    description: 'Bandingkan kinerja Anda dengan standar industri.',
-    icon: FiAward,
-  },
-  {
-    name: 'Analisis Arus Kas',
-    description: 'Perincian mendetail tentang arus kas masuk dan keluar.',
+    name: 'Analisis Laporan Laba Rugi',
+    description: 'Perincian mendetail tentang pendapatan, biaya, dan laba.',
     icon: FiDollarSign,
   },
 ];

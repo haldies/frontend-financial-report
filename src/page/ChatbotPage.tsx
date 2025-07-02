@@ -21,13 +21,14 @@ function ChatbotPage() {
   }, [isSidebarOpen]);
 
   return (
-    <div className="min-h-screen flex relative bg-gray-50">
-      {/* Sidebar component remains here, it will now overlay due to its positioning */}
+    <div className=" flex relative bg-gray-50 ">
+  
       <Sidebar isOpen={isSidebarOpen} />
 
-      {/* Main content div - NO X-translation animation */}
+  
       <div className="flex-1 p-6 relative">
-        {/* Overlay appears on ChatBot when sidebar is open */}
+    
+
         {isSidebarOpen && (
           <motion.div
             initial={{ opacity: 0 }}
@@ -40,25 +41,26 @@ function ChatbotPage() {
         )}
 
         <a href="/">
-          <h1 className="text-emerald-700 ml-12 font-extrabold text-3xl mb-8 relative z-40">
+          <h1 className="flex items-center  text-emerald-700 ml-12 font-extrabold text-2xl relative z-40 pt-1 pb-3">
             Chatfine
           </h1>
         </a>
 
         <ChatBot />
+        <button
+          onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+          className="absolute top-6 left-4 p-2  z-50 text-emerald-600 hover:bg-emerald-50 transition-colors duration-200"
+        >
+          {isSidebarOpen ? (
+            <CgMenuLeftAlt size={28} />
+          ) : (
+            <CgMenuRightAlt size={28} />
+          )}
+        </button>
       </div>
 
       {/* Sidebar Toggle Button */}
-      <button
-        onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-        className="absolute top-6 left-4 p-2 rounded-full bg-white shadow-md z-50 text-emerald-600 hover:bg-emerald-50 transition-colors duration-200"
-      >
-        {isSidebarOpen ? (
-          <CgMenuLeftAlt size={28} />
-        ) : (
-          <CgMenuRightAlt size={28} />
-        )}
-      </button>
+
     </div>
   );
 }

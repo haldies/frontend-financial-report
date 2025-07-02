@@ -1,7 +1,20 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
+@import "katex/dist/katex.min.css";
+
+
 
 :root {
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     line-height: 1.5;
     font-weight: 400;   
+}
+
+/* sembunyikan scrollbar, tapi tetap bisa scroll */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none; /* IE & Edge */
+  scrollbar-width: none;    /* Firefox */
 }
