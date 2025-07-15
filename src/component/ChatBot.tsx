@@ -26,21 +26,78 @@ function parseBotResponse(text: string) {
   return { thinkText, answerText };
 }
 
-function BotMessage({ text }: { text: string }) {
-  const { thinkText, answerText } = parseBotResponse(text);
-  const [showThink, setShowThink] = useState(false);
-  const [copied, setCopied] = useState(false);
+function StreamingText({ text, onComplete }: { text: string; onComplete?: () => void }) {
+  const [displayedText, setDisplayedText] = useState("");
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isComplete, setIsComplete] = useState(false);
 
   const preprocessMath = (text: string) => {
     return text
-      .replace(/\\\[/g, '$$')
-      .replace(/\\\]/g, '$$');
+      .replace(/\\\[/g, '$')
+      .replace(/\\\]/g, '$');
+  };
+
+  useEffect(() => {
+    if (currentIndex < text.length) {
+      const timer = setTimeout(() => {
+        setDisplayedText(prev => prev + text[currentIndex]);
+        setCurrentIndex(prev => prev + 1);
+      }, 20); 
+
+      return () => clearTimeout(timer);
+    } else if (currentIndex === text.length && !isComplete) {
+      setIsComplete(true);
+      onComplete?.();
+    }
+  }, [currentIndex, text, isComplete, onComplete]);
+
+  // Reset when text changes
+  useEffect(() => {
+    setDisplayedText("");
+    setCurrentIndex(0);
+    setIsComplete(false);
+  }, [text]);
+
+  return (
+    <div className="relative">
+      <ReactMarkdown
+        remarkPlugins={[remarkGfm, remarkMath]}
+        rehypePlugins={[rehypeKatex]}
+      >
+        {preprocessMath(displayedText)}
+      </ReactMarkdown>
+      {!isComplete && (
+        <span className="inline-block w-2 h-5 bg-emerald-600 animate-pulse ml-1"></span>
+      )}
+    </div>
+  );
+}
+
+function BotMessage({ text, isStreaming = false, onStreamingComplete }: { 
+  text: string; 
+  isStreaming?: boolean; 
+  onStreamingComplete?: () => void; 
+}) {
+  const { thinkText, answerText } = parseBotResponse(text);
+  const [showThink, setShowThink] = useState(false);
+  const [copied, setCopied] = useState(false);
+  const [streamingComplete, setStreamingComplete] = useState(!isStreaming);
+
+  const preprocessMath = (text: string) => {
+    return text
+      .replace(/\\\[/g, '$')
+      .replace(/\\\]/g, '$');
   };
 
   const handleCopy = () => {
     navigator.clipboard.writeText(answerText);
     setCopied(true);
-    setTimeout(() => setCopied(false), 2000); // 2 detik animasi
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handleStreamingComplete = () => {
+    setStreamingComplete(true);
+    onStreamingComplete?.();
   };
 
   return (
@@ -67,19 +124,29 @@ function BotMessage({ text }: { text: string }) {
       )}
 
       <div className="relative text-emerald-900 leading-relaxed prose prose-emerald max-w-none mt-2">
-        <button
-          onClick={handleCopy}
-          className="flex items-center absolute p-1  rounded   hover:bg-gray-300 -top-5 right-2 text-lg hover:text-emerald-800 cursor-pointer transition-colors duration-200"
-          title="Copy answer"
-        >
-          {copied ? <FaCheck className="text-green-800" /> :<MdContentCopy />}
-        </button>
-        <ReactMarkdown
-          remarkPlugins={[remarkGfm, remarkMath]}
-          rehypePlugins={[rehypeKatex]}
-        >
-          {preprocessMath(answerText)}
-        </ReactMarkdown>
+        {streamingComplete && (
+          <button
+            onClick={handleCopy}
+            className="flex items-center absolute p-1 rounded hover:bg-gray-300 -top-5 right-2 text-lg hover:text-emerald-800 cursor-pointer transition-colors duration-200"
+            title="Copy answer"
+          >
+            {copied ? <FaCheck className="text-green-800" /> : <MdContentCopy />}
+          </button>
+        )}
+        
+        {isStreaming ? (
+          <StreamingText 
+            text={preprocessMath(answerText)} 
+            onComplete={handleStreamingComplete}
+          />
+        ) : (
+          <ReactMarkdown
+            remarkPlugins={[remarkGfm, remarkMath]}
+            rehypePlugins={[rehypeKatex]}
+          >
+            {preprocessMath(answerText)}
+          </ReactMarkdown>
+        )}
       </div>
     </div>
   );
@@ -120,6 +187,7 @@ export default function ChatBot() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputMessage, setInputMessage] = useState("");
   const [loading, setLoading] = useState(false);
+  const [streamingMessageIndex, setStreamingMessageIndex] = useState<number | null>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -144,6 +212,10 @@ export default function ChatBot() {
       content: msg.text,
     }));
 
+  const handleStreamingComplete = () => {
+    setStreamingMessageIndex(null);
+  };
+
   const handleSend = async () => {
     if (!inputMessage.trim() || loading) return;
 
@@ -165,7 +237,14 @@ export default function ChatBot() {
       if (!response.ok) throw new Error(`Server error: ${response.statusText}`);
 
       const data = await response.json();
-      setMessages((prev) => [...prev, { text: data.jawaban, isBot: true }]);
+      
+      // Tambahkan pesan bot dan mulai streaming
+      setMessages((prev) => {
+        const newMessages = [...prev, { text: data.jawaban, isBot: true }];
+        setStreamingMessageIndex(newMessages.length - 1);
+        return newMessages;
+      });
+      
     } catch (error) {
       console.error("Fetch error:", error);
       setMessages((prev) => [
@@ -201,7 +280,15 @@ export default function ChatBot() {
                   : "bg-white text-gray-800 border border-emerald-300 rounded-br-none"
               }`}
             >
-              {msg.isBot ? <BotMessage text={msg.text} /> : msg.text}
+              {msg.isBot ? (
+                <BotMessage 
+                  text={msg.text} 
+                  isStreaming={streamingMessageIndex === index}
+                  onStreamingComplete={handleStreamingComplete}
+                />
+              ) : (
+                msg.text
+              )}
             </div>
           </div>
         ))}

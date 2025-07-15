@@ -117,30 +117,29 @@ function Footer() {
 
 export default Footer
 
-
 const footerNavigation = {
-    solutions: [
-        { name: 'Financial Analysis', href: '#' },
-        { name: 'Risk Assessment', href: '#' },
-        { name: 'Investment Insights', href: '#' },
-        { name: 'Cash Flow Optimization', href: '#' },
-    ],
-    support: [
-        { name: 'Documentation', href: '#' },
-        { name: 'Guides', href: '#' },
-        { name: 'API Status', href: '#' },
-        { name: 'Live Support', href: '#' },
-    ],
-    company: [
-        { name: 'About', href: '#' },
-        { name: 'Blog', href: '#' },
-        { name: 'Careers', href: '#' },
-        { name: 'Press', href: '#' },
-    ],
-    legal: [
-        { name: 'Privacy', href: '#' },
-        { name: 'Terms', href: '#' },
-        { name: 'Cookie Policy', href: '#' },
-        { name: 'GDPR', href: '#' },
-    ],
+  solutions: [
+    { name: 'Financial Analysis (dummy)', href: '#' },
+    { name: 'Risk Assessment (dummy)', href: '#' },
+    { name: 'Investment Insights (dummy)', href: '#' },
+    { name: 'Cash Flow Optimization (dummy)', href: '#' },
+  ],
+  support: [
+    { name: 'Documentation (dummy)', href: '#' },
+    { name: 'Guides (dummy)', href: '#' },
+    { name: 'API Status (dummy)', href: '#' },
+    { name: 'Live Support (dummy)', href: '#' },
+  ],
+  company: [
+    { name: 'About (dummy)', href: '#' },
+    { name: 'Blog (dummy)', href: '#' },
+    { name: 'Careers (dummy)', href: '#' },
+    { name: 'Press (dummy)', href: '#' },
+  ],
+  legal: [
+    { name: 'Privacy (dummy)', href: '#' },
+    { name: 'Terms (dummy)', href: '#' },
+    { name: 'Cookie Policy (dummy)', href: '#' },
+    { name: 'GDPR (dummy)', href: '#' },
+  ],
 };
